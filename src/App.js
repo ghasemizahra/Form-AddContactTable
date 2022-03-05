@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Formm from './Form'
+import Table from './Table'
+import { Button } from 'react-bootstrap';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+   constructor(props){
+     super(props)
+     this.state={
+       contacts:[]
+     }
+     this.handelContactsend=this.handelContactsend.bind(this)
+   }
+   handelContactsend(contactObj){
+    this.setState({
+      contacts:[...this.state.contacts,contactObj]
+    })
+
+   }
+  render() {
+    return (
+      <div>
+        <Formm addContact={this.handelContactsend} />
+        <Table  contacts={this.state.contacts} />
+      </div>
+    )
+  }
 }
-
-export default App;
+export default App
